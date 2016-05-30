@@ -1,0 +1,48 @@
+
+    <!-- main-page -->
+    <section class="page" id="page-main" data-title="pick">
+      <article>
+        <div class="chose-area">
+          <p class="chose-title">
+            chose what you want to pick
+          </p>
+
+          <!-- CHOSE AREA -->
+          <ul id="main-choseList">
+            <li>加载中...</li>
+          </ul>
+          <script id="tmp-main-choseList" type="text/template">
+            {{~it: item}}
+              <li>
+                <p class="song-name">{{=item.name}}</p>
+                <p class="song-time">{{=item.time}}</p>
+                <p class="song-time">{{=item.lastTime}}</p>
+              </li>
+            {{~}}
+          </script>
+
+        </div>
+
+        <!-- Pull Button  -->
+        <div class="pull-btn">
+
+        </div>
+
+        <!-- IMAGES AREA -->
+        <div class="img-area">
+          <div id="main-imgBox">
+            for chose
+          </div>
+          <script id="tmp-main-imgBox" type="text/template">
+            {{~it: item}}
+              <div class="img-item" style="background-image:url({{=item}})"></div>
+            {{~}}
+          </script>
+        </div>
+
+        <!-- SONG AREA -->
+        <div class="song-area">
+
+        </div>
+      </article>
+    </section>

@@ -1,0 +1,115 @@
+/**
+ * @overview PICK
+ *
+ * =============================================================================
+ *  Page-login
+ * =============================================================================
+ *
+ *   for page:
+ *     #page-login
+ *
+ * =============================================================================
+ *
+ * @author Spray Lee
+ * @create 2016-5-23
+ *
+ *
+ */
+#page-login {
+  z-index: 100;
+}
+#page-login article {
+  background-image: url(../../img/guitar_bg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+#page-login .login-title {
+  font-size: 24px;
+  font-family: "microsoft yahei";
+  position: relative;
+}
+#page-login .login-box {
+  position: absolute;
+  bottom: 100px;
+  left:   150px;
+  padding: 40px;
+  width: 400px;
+  border: 5px solid #401d26;
+}
+#page-login .login-title:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  left: 20px;
+  top: 30px;
+  transform: rotate(-45deg);
+  background-color: #401d26;
+}
+#page-login form input {
+  background-color: transparent;
+  width: 100%;
+  padding-left: 10px;
+  height: 30px;
+  font-size: 16px;
+  line-height: 30px;
+  border: 2px solid #401d26;
+}
+#login-btn {
+  width: 100%;
+  height: 30px;
+  display: block;
+  line-height: 26px;
+  font-size: 16px;
+  text-align: center;
+  border: 2px solid #401d26;
+}
+#login-btn:hover {
+  background-color: #401d26;
+  color: #fff;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #401d26;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #401d26;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #401d26;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #401d26;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{}

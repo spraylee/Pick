@@ -49,8 +49,8 @@
     HANDLER_initPage(data);
   });
 
-  // $imgBox.on("resize", HANDLER_changImgSize);
-  //
+  $(window).on("resize", HANDLER_changImgSize);
+
   // $imgBox.on("mousedown", function (event) {
   //   _mouseState.x = event.screenX;
   //   _mouseState.scrollFromX = $imgBox.position().left;
@@ -112,16 +112,16 @@
     var roomWidth = $imgArea.width();
     var roomHeight = $imgArea.height();
 
-    if (roomWidth > roomHeight) {
+    if (roomWidth > roomHeight) {  // 横屏（PC）
       for (var i = 0; i < _currentSong.page.length; i++) { //20 上下边距加边框  mediaBarHeight 音乐条高度
-        $imgBox.find(".img-item")[i].style.height = document.documentElement.clientHeight - 20 + "px";
-        $imgBox.find(".img-item")[i].style.width = (document.documentElement.clientHeight - 20) / 1.4 + 20 + "px";
+        $imgBox.find(".img-item")[i].style.height = document.documentElement.clientHeight - 10 + "px";
+        $imgBox.find(".img-item")[i].style.width = (document.documentElement.clientHeight - 10) / 1.7 + 10 + "px";
       }
-      $imgBox.width(((document.documentElement.clientHeight - 20) / 1.4 + 40) * _currentSong.page.length);
-    } else {
+      $imgBox.width(((document.documentElement.clientHeight - 10) / 1.7 + 40) * _currentSong.page.length);
+    } else { // 竖屏（Mobie）
       for (var i = 0; i < _currentSong.page.length; i++) { //20 上下边距加边框  mediaBarHeight 音乐条高度
-        $imgBox.find(".img-item")[i].style.width = document.documentElement.clientWidth - 20 + "px";
-        $imgBox.find(".img-item")[i].style.height = (roomHeight- 20 - mediaBarHeight) + "px";
+        $imgBox.find(".img-item")[i].style.width = document.documentElement.clientWidth - 10 + "px";
+        $imgBox.find(".img-item")[i].style.height = (roomHeight- 10 - mediaBarHeight) + "px";
       }
     }
   }
@@ -159,13 +159,15 @@
           time: "3:00",
           lastTime: 120,
           pickTimes: 31,
-          page: ["page/song_0/page_0.gif", "page/song_0/page_1.gif", "page/song_0/page_2.gif"]
+          stars: 2,
+          page: ["page/一个人的北京/page_0.gif", "page/一个人的北京/page_1.gif", "page/一个人的北京/page_2.gif"]
         }, {
           id: 1,
           name: "song2",
           time: "5:20",
           lastTime: 170,
           pickTimes: 13,
+          stars: 2,
           page: ["page/song_1/page_0.png", "page/song_1/page_1.png"]
         }, {
           id:2,
@@ -173,6 +175,7 @@
           time: "1:20",
           lastTime: 150,
           pickTimes: 18,
+          stars: 2,
           page: ["page/song_2/page_0.png", "page/song_2/page_1.png"]
         }]
       }

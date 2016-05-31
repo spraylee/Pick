@@ -92,13 +92,23 @@
    */
 
   function AJAX_postLoginInfo(data, success) {
-    return function () {
-      var jsonObj = {
-        success: true,
-        data   : ""
-      }
-      success(jsonObj);
-    }();
+    if (data[0] === "spraylee" && data[1] === "123456") {
+      return function () {
+        var jsonObj = {
+          success: true,
+          data   : ""
+        }
+        success(jsonObj);
+      }();
+    } else {
+      return function () {
+        var jsonObj = {
+          success: false,
+          data   : ""
+        }
+        success(jsonObj);
+      }();
+    }
     var url   = "";
     var param = data;
     $.ajax({

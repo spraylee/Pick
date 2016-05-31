@@ -31,7 +31,7 @@
    */
   $(window).on("load", function (event) {
     form.username.value = "spraylee";
-    form.password.value = "666666";
+    form.password.value = "123456";
     $loginBtn.trigger("click");
   });
 

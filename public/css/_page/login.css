@@ -45,7 +45,8 @@
   height: 3px;
   left: 20px;
   top: 30px;
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
   background-color: #401d26;
 }
 #page-login form input {

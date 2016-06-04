@@ -23,6 +23,7 @@
   var $pageMain  = $("#page-main");
   var $pageLogin = $("#page-login");
 
+  var $choseArea = $(".chose-area");
   var $choseList = $("#main-choseList");
   var $tmpChoseList = $("#tmp-main-choseList");
 
@@ -31,48 +32,71 @@
 
   var $imgArea = $(".img-area");
 
+  var $fullScreenBtn = $(".full-screen-btn");
+  var $pullBtn = $(".pull-btn");
+
   var _choseList = [];
   var _currentSong = null;
 
-  // var _mouseState = {
-  //   x: undefined,
-  //   y: undefined,
-  //   scrollFromX: undefined,
-  // }
+
   /**
    * ---------------------------------------------------------------------------
    *  Event Binding
    * ---------------------------------------------------------------------------
    */
+   // 页面跳转事件
   $pageMain.on("open", function (event, data) {
     $(window).trigger("pageOpen", [$pageMain, $pageLogin]);
     HANDLER_initPage(data);
   });
 
+  // 窗口大小改变时，动态调整图片大小
   $(window).on("resize", HANDLER_changImgSize);
 
-  // $imgBox.on("mousedown", function (event) {
-  //   _mouseState.x = event.screenX;
-  //   _mouseState.scrollFromX = $imgBox.position().left;
-  //   console.log("set:      " + _mouseState.scrollFromX);
-  //   console.log("_____________________________");
-  // });
-  // $imgBox.on("mousemove", function (event) {
-  //   if (event.buttons === 1) {
-  //     $imgBox[0].style.left =  event.screenX - _mouseState.x + _mouseState.scrollFromX + "px";
-  //     if ($imgBox.position().left > 0 ) {
-  //       $imgBox[0].style.left = 0 + "px";
-  //     }
-  //     if ($imgBox.position().left < $imgArea.width() - $imgBox.width()) {
-  //       $imgBox[0].style.left = $imgArea.width() - $imgBox.width() + "px";
-  //     }
-  //     console.log(event.screenX - _mouseState.x);
-  //   }
-  // });
-  // $(window).on("mouseup", function (event) {
-  //   console.log("to:  " + $imgBox.position().left);
-  //   console.log("++++++++++++++++++++++++++++++");
-  // });
+  // 全屏
+  $fullScreenBtn.on("click", function (event) {
+    if ($pageMain.hasClass("full-screen")) {
+      exitFull();
+      $pageMain.removeClass("full-screen");
+    } else {
+      requestFullScreen($pageMain[0]);
+      $pageMain.addClass("full-screen");
+    }
+  });
+
+
+  // 换谱
+  $choseList.on("click", function (event) {
+    var path = event.originalEvent.path;
+    for (var i = 0; i < _choseList.length; i++) {
+      if (path.indexOf($choseList.find("li")[i]) > -1) {
+        _currentSong = _choseList[i];
+        RENDER_showSong(_choseList[i].page);
+        HANDLER_changImgSize();
+        $choseArea.removeClass("hover");
+      }
+    }
+  });
+
+  // 点击显示侧边栏
+  $pullBtn.on("click", function (event) {
+    $choseArea.toggleClass("hover");
+  });
+
+  // 悬停显示侧边栏
+  $choseArea.hover(function (event) {
+    $choseArea.addClass("hover");
+  }, function (event) {
+    // $choseArea.removeClass("hover");
+  });
+
+  // 点击取消侧边栏
+  $imgArea.on("click", function (event) {
+    if ($choseArea.hasClass("hover")) {
+      $choseArea.removeClass("hover");
+    }
+  });
+
 
   /**
    * ---------------------------------------------------------------------------
@@ -113,11 +137,19 @@
     var roomHeight = $imgArea.height();
 
     if (roomWidth > roomHeight) {  // 横屏（PC）
-      for (var i = 0; i < _currentSong.page.length; i++) { //20 上下边距加边框  mediaBarHeight 音乐条高度
-        $imgBox.find(".img-item")[i].style.height = document.documentElement.clientHeight - 10 + "px";
-        $imgBox.find(".img-item")[i].style.width = (document.documentElement.clientHeight - 10) / 1.7 + 10 + "px";
+      if (_currentSong.page.length >= 3) {
+        for (var i = 0; i < _currentSong.page.length; i++) { //20 上下边距加边框  mediaBarHeight 音乐条高度
+          $imgBox.find(".img-item")[i].style.height = document.documentElement.clientHeight - 10 + "px";
+          $imgBox.find(".img-item")[i].style.width = ((document.documentElement.clientWidth) / 3 - 10) + "px";
+        }
+        $imgBox.width(((document.documentElement.clientWidth) / 3) * _currentSong.page.length);
+      } else {
+        for (var i = 0; i < _currentSong.page.length; i++) { //20 上下边距加边框  mediaBarHeight 音乐条高度
+          $imgBox.find(".img-item")[i].style.height = document.documentElement.clientHeight - 10 + "px";
+          $imgBox.find(".img-item")[i].style.width = (document.documentElement.clientHeight - 10) / 1.5 + "px";
+        }
+        $imgBox.width(document.documentElement.clientWidth);
       }
-      $imgBox.width(((document.documentElement.clientHeight - 10) / 1.7 + 40) * _currentSong.page.length);
     } else { // 竖屏（Mobie）
       for (var i = 0; i < _currentSong.page.length; i++) { //20 上下边距加边框  mediaBarHeight 音乐条高度
         $imgBox.find(".img-item")[i].style.width = document.documentElement.clientWidth - 10 + "px";
@@ -125,7 +157,7 @@
       }
     }
   }
-  // console.dir(document.documentElement);
+
 
   /**
    * ---------------------------------------------------------------------------
@@ -160,23 +192,26 @@
           lastTime: 120,
           pickTimes: 31,
           stars: 2,
-          page: ["page/一个人的北京/page_0.gif", "page/一个人的北京/page_1.gif", "page/一个人的北京/page_2.gif"]
+          page: ["page/一个人的北京/page_0.gif", "page/一个人的北京/page_1.gif", "page/一个人的北京/page_2.gif"],
+          icon: "page/一个人的北京/icon.jpg"
         }, {
           id: 1,
-          name: "song2",
+          name: "唱歌的孩子",
           time: "5:20",
           lastTime: 170,
           pickTimes: 13,
           stars: 2,
-          page: ["page/song_1/page_0.png", "page/song_1/page_1.png"]
+          page: ["page/唱歌的孩子/唱歌的孩子01.gif", "page/唱歌的孩子/唱歌的孩子02.gif", "page/唱歌的孩子/唱歌的孩子03.gif"],
+          icon: "page/唱歌的孩子/icon.jpg"
         }, {
           id:2,
-          name: "song3",
+          name: "玫瑰",
           time: "1:20",
           lastTime: 150,
           pickTimes: 18,
           stars: 2,
-          page: ["page/song_2/page_0.png", "page/song_2/page_1.png"]
+          page: ["page/玫瑰/玫瑰01.gif", "page/玫瑰/玫瑰02.gif"],
+          icon: "page/玫瑰/icon.jpg"
         }]
       }
       success(jsonObj);
@@ -190,6 +225,45 @@
       dataType: "json",
       success : success
     });
+  }
+
+
+  // document.getElementById("full-screen-btn").onclick = function() {
+  //   // var elem = document.getElementById("content");
+  //   // requestFullScreen(elem);
+  //   requestFullScreen($pageMain[0]);
+  // };
+
+
+
+  function requestFullScreen(element) {
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+    if (requestMethod) {
+      requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") {
+      var wscript = new ActiveXObject("WScript.Shell");
+      if (wscript !== null) {
+        wscript.SendKeys("{F11}");
+      }
+    }
+  }
+
+  //退出全屏 判断浏览器种类
+
+  function exitFull() {
+    // 判断各种浏览器，找到正确的方法
+    var exitMethod = document.exitFullscreen || //W3C
+      document.mozCancelFullScreen || //Chrome等
+      document.webkitExitFullscreen || //FireFox
+      document.webkitExitFullscreen; //IE11
+    if (exitMethod) {
+      exitMethod.call(document);
+    } else if (typeof window.ActiveXObject !== "undefined") { //for Internet Explorer
+      var wscript = new ActiveXObject("WScript.Shell");
+      if (wscript !== null) {
+        wscript.SendKeys("{F11}");
+      }
+    }
   }
 
 

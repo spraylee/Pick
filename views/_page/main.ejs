@@ -14,6 +14,7 @@
           <script id="tmp-main-choseList" type="text/template">
             {{~it: item}}
               <li>
+                <div class="icon" style="background-image:url({{=item.icon}})"></div>
                 <p class="song-name">{{=item.name}}</p>
                 <p class="song-time">{{=item.time}}</p>
                 <p class="song-time">{{=item.lastTime}}</p>
@@ -25,7 +26,12 @@
 
         <!-- Pull Button  -->
         <div class="pull-btn">
-
+          
+        </div>
+        
+        <!-- Full Screen Button-->
+        <div class="full-screen-btn">
+          <img src="img/full_screen.png" alt="Full Screen/Exit Full"/>
         </div>
 
         <!-- IMAGES AREA -->

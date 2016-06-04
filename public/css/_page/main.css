@@ -28,10 +28,42 @@
   background-color: #fafafa;
   box-shadow: 2px 2px 2px 2px #ddd;
   transition: .4s all cubic-bezier(.82,.02,.15,.99);
-  padding: 30px;
+  padding: 10px;
 }
-#page-main .chose-area:hover {
+/*#page-main .chose-area:hover,*/
+#page-main .chose-area.hover {
   left: 0;
+}
+#page-main .chose-area ul {
+  padding-left: 10px;
+}
+#page-main .chose-area ul li {
+  cursor: pointer;
+  padding-left: 10px;
+}
+#page-main .chose-area ul li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#page-main .chose-area ul li + li{
+  border-top: 1px solid #ccc;
+}
+#page-main .chose-area ul li p {
+  margin: 10px;
+}
+#page-main .chose-area ul li p.song-name {
+  font-weight: bold;
+}
+#page-main .chose-area ul li .icon{
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  float: left;
+  background-size: contain;
+  background-position: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 20px;
 }
 
 #page-main .img-area {
@@ -49,11 +81,13 @@
   white-space: nowrap;
   letter-spacing: -1em;
   /*overflow: hidden;*/
-  cursor: crosshair;
+  /*cursor: crosshair;*/
   position: absolute;
   z-index: 20;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
 }
 #page-main .img-area .img-item {
   border: 5px solid white;
@@ -61,7 +95,7 @@
   margin: 5px;
   /*width: 100%;*/
   height: 100%;
-  float: left;
+  /*float: left;*/
   letter-spacing: normal;
   background-size: cover;
   background-position: center;
@@ -80,4 +114,65 @@
 }
 #page-main .song-area:hover {
   bottom: 0;
+}
+
+
+
+#page-main .full-screen-btn {
+  position: fixed;
+  z-index: 1000;
+  opacity: .1;
+  right: 50px;
+  top: 50px;
+  transition: all .3s;
+}
+@media (max-width: 768px) {
+  #page-main .full-screen-btn {
+    display: none;
+  }
+}
+#page-main .full-screen-btn:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+#page-main .full-screen-btn img {
+  width: 50px;
+  height: 50px;
+}
+
+
+#page-main .pull-btn {
+  position: fixed;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  left: 10px;
+  top: 20px;
+  border-radius: 25px;
+  background-color: white;
+  border: 1px solid #ccc;
+  opacity: .4;
+}
+#page-main .pull-btn::before,
+#page-main .pull-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+#page-main .pull-btn::before {
+  width: 25px;
+  height: 5px;
+  left: 10px;
+  top: 22px;
+  background-color: #ccc;
+}
+#page-main .pull-btn::after {
+  width: 16px;
+  height: 16px;
+  left: 16px;
+  top: 15px;
+  border-top: 4px solid #ccc;
+  border-right: 4px solid #ccc;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
 }

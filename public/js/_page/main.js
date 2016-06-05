@@ -67,6 +67,7 @@
 
   // 换谱
   $choseList.on("click", function (event) {
+    console.log(event);
     var path = event.originalEvent.path;
     for (var i = 0; i < _choseList.length; i++) {
       if (path.indexOf($choseList.find("li")[i]) > -1) {
@@ -104,8 +105,8 @@
    * ---------------------------------------------------------------------------
    */
   function HANDLER_initPage(user) {
-    AJXA_getDefaultList(user, function (json) {
-      var sortedList = HANDLER_sortList(json.data, "pickTimes", "-");
+    AJXA_getDefaultList(user, function (data) {
+      var sortedList = HANDLER_sortList(data, "pickTimes", "-");
       _choseList = sortedList;
       _currentSong = sortedList[0];
       RENDER_choseList(sortedList);
@@ -182,41 +183,7 @@
    */
 
   function AJXA_getDefaultList(user, success) {
-    return function () {
-      var jsonObj = {
-        success: true,
-        data   : [{
-          id: 0,
-          name: "一个人的北京",
-          time: "3:00",
-          lastTime: 120,
-          pickTimes: 31,
-          stars: 2,
-          page: ["page/一个人的北京/page_0.gif", "page/一个人的北京/page_1.gif", "page/一个人的北京/page_2.gif"],
-          icon: "page/一个人的北京/icon.jpg"
-        }, {
-          id: 1,
-          name: "唱歌的孩子",
-          time: "5:20",
-          lastTime: 170,
-          pickTimes: 13,
-          stars: 2,
-          page: ["page/唱歌的孩子/唱歌的孩子01.gif", "page/唱歌的孩子/唱歌的孩子02.gif", "page/唱歌的孩子/唱歌的孩子03.gif"],
-          icon: "page/唱歌的孩子/icon.jpg"
-        }, {
-          id:2,
-          name: "玫瑰",
-          time: "1:20",
-          lastTime: 150,
-          pickTimes: 18,
-          stars: 2,
-          page: ["page/玫瑰/玫瑰01.gif", "page/玫瑰/玫瑰02.gif"],
-          icon: "page/玫瑰/icon.jpg"
-        }]
-      }
-      success(jsonObj);
-    }();
-    var url = "";
+    var url = "./getPicks";
     var param = user;
     $.ajax({
       type    : "POST",
@@ -227,12 +194,6 @@
     });
   }
 
-
-  // document.getElementById("full-screen-btn").onclick = function() {
-  //   // var elem = document.getElementById("content");
-  //   // requestFullScreen(elem);
-  //   requestFullScreen($pageMain[0]);
-  // };
 
 
 

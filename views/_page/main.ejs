@@ -14,7 +14,7 @@
           <script id="tmp-main-choseList" type="text/template">
             {{~it: item}}
               <li>
-                <div class="icon" style="background-image:url({{=item.icon}})"></div>
+                <div class="icon" style="background-image:url(page/{{=item.name}}/{{=item.icon}})"></div>
                 <p class="song-name">{{=item.name}}</p>
                 <p class="song-time">{{=item.time}}</p>
                 <p class="song-time">{{=item.lastTime}}</p>
@@ -40,9 +40,9 @@
             for chose
           </div>
           <script id="tmp-main-imgBox" type="text/template">
-            {{~it: item}}
-              <div class="img-item" style="background-image:url({{=item}})"></div>
-            {{~}}
+            {{for (var i = 0; i < it.page.length; i++){ }}
+              <div class="img-item" style="background-image:url(page/{{=it.name}}/{{=it.page[i]}})"></div>
+            {{ } }}
           </script>
         </div>
 

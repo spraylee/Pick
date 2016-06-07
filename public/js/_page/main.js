@@ -72,7 +72,7 @@
     for (var i = 0; i < _choseList.length; i++) {
       if (path.indexOf($choseList.find("li")[i]) > -1) {
         _currentSong = _choseList[i];
-        RENDER_showSong(_choseList[i].page);
+        RENDER_showSong(_choseList[i]);
         HANDLER_changImgSize();
         $choseArea.removeClass("hover");
       }
@@ -110,7 +110,7 @@
       _choseList = sortedList;
       _currentSong = sortedList[0];
       RENDER_choseList(sortedList);
-      RENDER_showSong(sortedList[0].page);
+      RENDER_showSong(sortedList[0]);
       HANDLER_changImgSize();
     });
   }

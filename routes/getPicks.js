@@ -48,6 +48,24 @@ router.post('/', function(req, res, next) {
     stars: 2,
     page: ["第六季第24集《南方姑娘》01.gif","第六季第24集《南方姑娘》02.gif","第六季第24集《南方姑娘》03.gif"],
     icon: "icon.jpg"
+  }, {
+    id:2,
+    name: "老中医",
+    time: "1:20",
+    lastTime: 150,
+    pickTimes: 18,
+    stars: 2,
+    page: ["老中医_花粥_页面_1.jpg","老中医_花粥_页面_2.jpg"],
+    icon: "icon.jpg"
+  }, {
+    id:2,
+    name: "静静地看着你装逼",
+    time: "1:20",
+    lastTime: 150,
+    pickTimes: 18,
+    stars: 2,
+    page: ["静静地看着你装逼.jpg"],
+    icon: "icon.jpg"
   }];
   res.send(picks);
   // Pick.find(function(err, data) {

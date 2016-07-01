@@ -20,23 +20,23 @@
    *  Variable
    * ---------------------------------------------------------------------------
    */
-  var $pageMain  = $("#page-main");
-  var $pageLogin = $("#page-login");
+  var $pageMain      = $("#page-main");          // 主页面
+  var $pageLogin     = $("#page-login");         // 登陆页面
 
-  var $choseArea = $(".chose-area");
-  var $choseList = $("#main-choseList");
-  var $tmpChoseList = $("#tmp-main-choseList");
+  var $choseArea     = $(".chose-area");         // 选择区域
+  var $choseList     = $("#main-choseList");     // 选择列表
+  var $tmpChoseList  = $("#tmp-main-choseList"); // 选择列表渲染模版
 
-  var $imgBox = $("#main-imgBox");
-  var $tmpImgBox = $("#tmp-main-imgBox");
+  var $imgBox        = $("#main-imgBox");        // 吉他谱容器
+  var $tmpImgBox     = $("#tmp-main-imgBox");    // 吉他谱容器渲染模版
 
-  var $imgArea = $(".img-area");
+  var $imgArea       = $(".img-area");           // 谱区域
 
-  var $fullScreenBtn = $(".full-screen-btn");
-  var $pullBtn = $(".pull-btn");
+  var $fullScreenBtn = $(".full-screen-btn");    // 全屏按钮
+  var $pullBtn       = $(".pull-btn");           // 侧边栏按钮
 
-  var _choseList = [];
-  var _currentSong = null;
+  var _choseList     = [];                       // 列表数据
+  var _currentSong   = null;                     // 当前选择数据
 
 
   /**
@@ -44,7 +44,7 @@
    *  Event Binding
    * ---------------------------------------------------------------------------
    */
-   // 页面跳转事件
+  // 页面跳转事件
   $pageMain.on("open", function (event, data) {
     $(window).trigger("pageOpen", [$pageMain, $pageLogin]);
     HANDLER_initPage(data);

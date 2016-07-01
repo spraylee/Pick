@@ -10,6 +10,7 @@
  * @author Spray Lee
  * @create 2016-05-23
  *
+ * note: 本地储存记住用户名密码，Delete可以删除记忆
  */
 (function (window, document, $) {
 
@@ -35,6 +36,16 @@
    * ---------------------------------------------------------------------------
    */
 
+  $(window).ready(function() {
+    var username = localStorage.username;
+    var password = localStorage.password;
+    if (username && password) {
+      form.username.value = username;
+      form.password.value = "123456";
+      // $loginBtn.trigger("click");
+    }
+  });
+
   // 登录事件
   $loginBtn.on("click", function() {
     var username = form.username.value;
@@ -45,6 +56,8 @@
     }
     AJAX_postLoginInfo([username, password], function(json) {
       var user = json.data;
+      localStorage.username = username;
+      localStorage.password = password;
       if (json.success) {
         $pageMain.trigger("open", [user]);
       } else {
@@ -59,7 +72,11 @@
     if (event.keyCode == 13) {
       $loginBtn.trigger("click");
     }
+    if (event.keyCode == 46) {
+      localStorage.clear();
+    }
   });
+
 
 
 
@@ -70,6 +87,15 @@
    * ---------------------------------------------------------------------------
    */
 
+
+
+
+
+  /**
+   * ---------------------------------------------------------------------------
+   *  Business Logic
+   * ---------------------------------------------------------------------------
+   */
 
 
 

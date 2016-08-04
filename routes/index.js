@@ -15,14 +15,9 @@ router.post('/', function(req, res, next) {
     res.send(req.query.echostr);
     return;
   }
+  var openId = req.query.openid;
   console.log(req.body);
-  res.send('<xml>\
-<ToUserName><![CDATA[toUser]]></ToUserName>\
-<FromUserName><![CDATA[fromUser]]></FromUserName>\
-<CreateTime>12345678</CreateTime>\
-<MsgType><![CDATA[text]]></MsgType>\
-<Content><![CDATA[你个SB]]></Content>\
-</xml>');
+  res.send('<xml><ToUserName><![CDATA[olkJIwxQL5fmszxCGYSn777OXQdo]]></ToUserName><FromUserName><![CDATA[SprayLee]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你个SB]]></Content></xml>');
 });
 
 module.exports = router;

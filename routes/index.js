@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
     res.send(req.query.echostr);
     return;
   }
+  console.log(req.body);
   res.send('<xml>\
 <ToUserName><![CDATA[toUser]]></ToUserName>\
 <FromUserName><![CDATA[fromUser]]></FromUserName>\

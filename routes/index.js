@@ -15,7 +15,13 @@ router.post('/', function(req, res, next) {
     res.send(req.query.echostr);
     return;
   }
-  res.send('sb');
+  res.send('<xml>\
+<ToUserName><![CDATA[toUser]]></ToUserName>\
+<FromUserName><![CDATA[fromUser]]></FromUserName>\
+<CreateTime>12345678</CreateTime>\
+<MsgType><![CDATA[text]]></MsgType>\
+<Content><![CDATA[你个SB]]></Content>\
+</xml>');
 });
 
 module.exports = router;

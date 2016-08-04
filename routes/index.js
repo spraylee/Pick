@@ -10,4 +10,12 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.post('/', function(req, res, next) {
+  if (req.query.echostr) {
+    res.send(req.query.echostr);
+    return;
+  }
+  res.send('sb');
+});
+
 module.exports = router;
